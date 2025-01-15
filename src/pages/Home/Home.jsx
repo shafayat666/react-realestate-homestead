@@ -1,7 +1,9 @@
+import Banner from "../../components/Banner";
+
 const Home = () => {
   return (
     <div>
-      <h1 className="text-3xl">This is the home page.</h1>      
+      <Banner></Banner>
     </div>
   );
 };
