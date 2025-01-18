@@ -1,33 +1,45 @@
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
-import NavBar from "../components/NavBar";
-import Footer from "../components/Footer";
+import { Bounce, toast, ToastContainer } from "react-toastify";
 
 const Login = () => {
   const { logIn } = useContext(AuthContext)
+  const navigate = useNavigate();
 
   const handleLogin = (event) => {
     event.preventDefault();
-    
+
     const form = new FormData(event.currentTarget);
-    
+
     const email = form.get("email")
     const password = form.get("password")
-    
+
     logIn(email, password)
-    .then((userCredential) => {
-      console.log("user logged in successfully");
-      console.log(userCredential.user);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
+      .then((userCredential) => {
+        console.log("user logged in successfully");
+        console.log(userCredential.user);
+        navigate("/")
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error('Please enter correct user credential', {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      })
   }
 
   return (
     <div>
-      <div className="hero bg-base-200 min-h-screen">
+      <div className="hero">
         <div className="hero-content flex-col">
           <div className="text-center">
             <h1 className="text-5xl font-bold">Login now!</h1>
@@ -56,7 +68,19 @@ const Login = () => {
           </div>
         </div>
       </div>
-      
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
     </div>
 
   );

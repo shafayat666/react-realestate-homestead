@@ -7,11 +7,12 @@ const NavBar = () => {
 
   const handleSignOut = () => {
     logOut()
-    .then(() => console.log("Sign-out succesful"))
-    .catch((error) => console.log(error))
+      .then(() => console.log("Sign-out succesful"))
+      .catch((error) => console.log(error))
   }
 
   const lists = <>
+    {user && <Link className="mr-10" to={"/profile"}>Profile</Link>}
     <Link className="mr-10" to={"/"}>Home</Link>
     <Link className="mr-10" to={"/about"}>About</Link>
     <Link className="mr-10" to={"/contact"}>Contact</Link>
@@ -37,7 +38,7 @@ const NavBar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-black">
             {lists}
           </ul>
         </div>
@@ -52,7 +53,11 @@ const NavBar = () => {
         {
           user ?
             <>
-              <span>{user.email}</span>
+              <img
+                className="w-10 rounded-full"
+                alt="Tailwind CSS Navbar component"
+                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+
               <button onClick={handleSignOut} className="btn btn-success">Sign Out</button>
             </>
             :
