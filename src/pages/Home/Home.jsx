@@ -1,14 +1,10 @@
 import { Button, Carousel, Typography } from "@material-tailwind/react";
-import NavBar from "../../components/NavBar";
 import Featured from "../../components/Featured";
-import Footer from "../../components/Footer";
 
 const Home = () => {
   return (
     <div className="relative">
-      <div className="absolute top-0 left-0 w-full z-50">
-        <NavBar></NavBar>
-      </div>
+      
       <Carousel>
         <div className="relative h-screen w-full">
           <img
@@ -121,9 +117,6 @@ const Home = () => {
       </Carousel>
       <div>
         <Featured></Featured>
-      </div>
-      <div>
-        <Footer></Footer>
       </div>
     </div>
 
