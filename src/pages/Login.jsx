@@ -1,10 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { Bounce, toast, ToastContainer } from "react-toastify";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const { logIn } = useContext(AuthContext)
+  const [showPass, setShowPass] = useState(false)
   const navigate = useNavigate();
 
   const handleLogin = (event) => {
@@ -56,7 +58,16 @@ const Login = () => {
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <input name="password" type="password" placeholder="password" className="input input-bordered" required />
+
+                <div className="relative flex items-center">
+                  <input name="password" type={showPass ? "text" : "password"} placeholder="password" className="input input-bordered" required />
+                  <span className="absolute right-3" onClick={() => setShowPass(!showPass)}>
+                    {
+                      showPass ? <FaEyeSlash /> : <FaEye />
+                    }
+                  </span>
+                </div>
+
                 <label className="label">
                   <p className="text-sm">New here? Please <NavLink className="text-blue-500 underline hover:text-blue-700" to={"/register"}>Sign Up</NavLink></p>
                 </label>
